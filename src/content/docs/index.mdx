@@ -1,0 +1,41 @@
+---
+# title：纯文本，用于 <head> 的 <title>、og:title 等元信息。
+# hero.title：页面 H1 展示文案，支持 HTML（如 <sup> 上标），不填时回退到 title。
+
+title: BeaComm (Beta) - Your Own Chat Server
+description: Self-hosted chat server software.
+
+template: splash # Remove or comment out this line to display the site sidebar on this page.
+
+hero:
+  title: 'BeaComm<sup>Beta</sup> - Your Own Chat Server'
+  tagline: Your own chat server, up and running with a single command
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: Get started
+      link: /#pricing
+      icon: right-arrow
+
+    - text: Read the docs
+      link: /intro/install-server/
+      # icon: external
+      variant: minimal
+
+---
+
+import RunCodeSection from '../../components/RunCodeSection.astro';
+import FeaturesSection from '../../components/FeaturesSection.astro';
+import PricingSection from '../../components/PricingSection.astro';
+import DownloadSection from '../../components/DownloadSection.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+<RunCodeSection />
+
+<FeaturesSection />
+
+<PricingSection />
+
+<DownloadSection />
+
+<ContactSection />

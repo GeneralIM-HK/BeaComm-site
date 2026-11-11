@@ -1,0 +1,79 @@
+---
+/**
+ * “运行代码”区块：标题 + 说明 + 一段命令行示例，代码块下方可选跳转链接。
+ * 内容在 src/config/site.ts 的 `runCode` 中配置（code / lang / link），
+ * `link` 为可选配置：看不懂命令的用户可点击前往文档，删除该配置即可隐藏。
+ */
+import { Code, Icon } from '@astrojs/starlight/components';
+import { siteConfig } from '../config/site';
+import { isExternalHref, localizeHref, resolveSiteLocale, t } from '../lib/i18n';
+
+const locale = resolveSiteLocale(Astro.locals.starlightRoute.locale);
+const { title, description, code, lang, link } = siteConfig.runCode;
+const linkHref = link ? localizeHref(link.href, locale) : undefined;
+const linkExternal = linkHref ? (link.external ?? isExternalHref(linkHref)) : false;
+---
+
+<section class="bc-section bc-runcode" id="install">
+	<h2>{t(title, locale)}</h2>
+	<p class="bc-section-desc">{t(description, locale)}</p>
+	<Code code={code} lang={lang} />
+	{
+		link && linkHref && (
+			<div class="bc-runcode-more">
+				<a
+					class="bc-runcode-link"
+					href={linkHref}
+					rel={linkExternal ? 'noopener noreferrer' : undefined}
+					target={linkExternal ? '_blank' : undefined}
+				>
+					{t(link.label, locale)}
+					<Icon name="right-arrow" size="1em" />
+				</a>
+			</div>
+		)
+	}
+</section>
+
+<style>
+	.bc-section {
+		margin-block: 3rem;
+	}
+	.bc-section h2 {
+		margin: 0;
+		font-size: var(--sl-text-3xl);
+		font-weight: 600;
+		line-height: var(--sl-line-height-headings);
+		color: var(--sl-color-white);
+		text-align: center;
+	}
+	.bc-section-desc {
+		margin: 0.75rem auto 0;
+		max-width: 44rem;
+		text-align: center;
+		color: var(--sl-color-gray-2);
+	}
+	.bc-runcode-more {
+		display: flex;
+		justify-content: center;
+		margin-top: 1.25rem;
+	}
+	.bc-runcode-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		color: var(--sl-color-text-accent);
+		font-size: var(--sl-text-sm);
+		text-decoration: none;
+	}
+	.bc-runcode-link:hover {
+		color: var(--sl-color-text-accent);
+		text-decoration: underline;
+		text-underline-offset: 0.3rem;
+	}
+	.bc-runcode-link:focus-visible {
+		outline: 2px solid var(--sl-color-text-accent);
+		outline-offset: 0.25rem;
+		border-radius: 0.25rem;
+	}
+</style>

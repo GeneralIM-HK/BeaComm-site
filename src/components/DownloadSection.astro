@@ -1,0 +1,131 @@
+---
+/**
+ * 下载区。平台入口在 src/config/site.ts 的 `downloads.items` 中配置，
+ * 支持任意数量（iOS / Android / Windows / macOS / Linux……）；
+ * 每个平台的 `links` 数组第一个为主要按钮，其余为次要按钮。
+ */
+import { LinkButton } from '@astrojs/starlight/components';
+import { siteConfig } from '../config/site';
+import { isExternalHref, localizeHref, resolveSiteLocale, t } from '../lib/i18n';
+import BcIcon from './BcIcon.astro';
+
+const locale = resolveSiteLocale(Astro.locals.starlightRoute.locale);
+const { title, description, items } = siteConfig.downloads;
+---
+
+<section class="bc-section bc-download not-content" id="download">
+	<h2>{t(title, locale)}</h2>
+	<p class="bc-section-desc">{t(description, locale)}</p>
+	<div class="bc-download-grid">
+		{
+			items.map((item) => (
+				<article class="bc-download-card">
+					<div class="bc-download-icon">
+						<BcIcon name={item.icon} svg={item.iconSvg} size="1.75rem" />
+					</div>
+					<h3>{t(item.label, locale)}</h3>
+					{item.sub && <p>{t(item.sub, locale)}</p>}
+					<div class="bc-download-links">
+						{item.links.map((link, index) => {
+							const href = localizeHref(link.href, locale);
+							const external = link.external ?? isExternalHref(href);
+							return (
+								<LinkButton
+									href={href}
+									variant={index === 0 ? 'primary' : 'minimal'}
+									class:list={['bc-download-btn', index !== 0 && 'bc-download-btn--link']}
+									rel={external ? 'noopener noreferrer' : undefined}
+									target={external ? '_blank' : undefined}
+								>
+									{t(link.label, locale)}
+								</LinkButton>
+							);
+						})}
+					</div>
+				</article>
+			))
+		}
+	</div>
+</section>
+
+<style>
+	.bc-section {
+		margin-block: 3rem;
+	}
+	.bc-section h2 {
+		margin: 0;
+		font-size: var(--sl-text-3xl);
+		font-weight: 600;
+		line-height: var(--sl-line-height-headings);
+		color: var(--sl-color-white);
+		text-align: center;
+	}
+	.bc-section-desc {
+		margin: 0.75rem auto 0;
+		max-width: 44rem;
+		text-align: center;
+		color: var(--sl-color-gray-2);
+	}
+
+	.bc-download-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+		gap: 1.25rem;
+		margin-top: 2rem;
+	}
+
+	.bc-download-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 0.75rem;
+		padding: 1.5rem 1rem;
+		background: var(--sl-color-bg);
+		transition: border-color 0.15s ease;
+	}
+	.bc-download-card:hover {
+		border-color: var(--sl-color-text-accent);
+	}
+	.bc-download-icon {
+		display: grid;
+		place-items: center;
+		width: 3.5rem;
+		height: 3.5rem;
+		border-radius: 0.875rem;
+		background: color-mix(in oklab, var(--sl-color-text-accent) 12%, var(--sl-color-bg));
+		color: var(--sl-color-text-accent);
+	}
+	.bc-download-card h3 {
+		margin: 0.9rem 0 0;
+		font-size: var(--sl-text-lg);
+		font-weight: 600;
+		line-height: var(--sl-line-height-headings);
+		color: var(--sl-color-white);
+	}
+	.bc-download-card p {
+		margin: 0.3rem 0 1.1rem;
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-3);
+	}
+	.bc-download-links {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.5rem;
+	}
+	.bc-download-btn {
+		justify-content: center;
+		margin: 0;
+	}
+	/* 次级按钮：无边框的彩色文字链接样式。 */
+	.bc-download-btn--link {
+		color: var(--sl-color-text-accent);
+	}
+	.bc-download-btn--link:hover {
+		color: var(--sl-color-text-accent);
+		text-decoration: underline;
+		text-underline-offset: 0.3rem;
+	}
+</style>

@@ -1,0 +1,211 @@
+---
+/**
+ * <head> 覆盖：在 Starlight 默认 head（title / description / canonical / OG 基础标签 /
+ * hreflang 交替链接 / sitemap）之上，只追加 Starlight 没有提供的 SEO 与 AI 爬虫元信息：
+ * - og:image 社交分享图与尺寸、og:locale:alternate
+ * - twitter 标题 / 描述 / 分享图 / 账号
+ * - robots 指令、关键词、Google 站点验证
+ * - JSON-LD 结构化数据（WebSite + SoftwareApplication）
+ * - Tawk.to 在线客服脚本（src/config/site.ts 的 `tawk.embedSrc`）
+ *
+ * 所有信息在 src/config/site.ts 的 `seo` 中配置。
+ */
+import DefaultHead from '@astrojs/starlight/components/Head.astro';
+import config from 'virtual:starlight/user-config';
+
+import { siteConfig } from '../config/site';
+import { localeDefs } from '../config/site';
+import { resolveSiteLocale, t } from '../lib/i18n';
+
+const route = Astro.locals.starlightRoute;
+const locale = resolveSiteLocale(route.locale);
+const seo = siteConfig.seo;
+const site = new URL(seo.siteUrl);
+
+const { lang, entry } = route;
+const title = entry.data.title;
+const description = entry.data.description;
+const canonical = new URL(Astro.url.pathname, site);
+const ogImage = new URL(seo.ogImage, site);
+
+// 404 页面不参与索引。
+const is404 = route.entry.id === '404' || route.entry.id.endsWith('/404');
+const robotsContent = is404
+	? 'noindex, nofollow'
+	: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+// og:locale:alternate 使用下划线格式（zh-CN → zh_CN），列出当前语言之外的其他语言。
+const otherOgLocales = Object.values(config.locales)
+	.map((localeConfig) => localeConfig?.lang ?? '')
+	.filter((localeLang) => localeLang && localeLang !== lang)
+	.map((localeLang) => localeLang.replaceAll('-', '_'));
+
+const keywords = t(seo.keywords, locale);
+
+// 浏览器语言自动适配：把 localeDefs 的匹配数据序列化后注入下方内联脚本。
+const localeBrowserTags = JSON.stringify(
+	Object.fromEntries(Object.entries(localeDefs).map(([key, def]) => [key, def.browserTags])),
+);
+const localeHomePaths = JSON.stringify(
+	Object.fromEntries(
+		Object.entries(localeDefs).map(([key, def]) => [def.root ? '/' : `/${key}/`, key]),
+	),
+);
+const localizedLocaleKeys = JSON.stringify(
+	Object.entries(localeDefs)
+		.filter(([, def]) => !def.root)
+		.map(([key]) => key),
+);
+
+// JSON-LD 结构化数据：WebSite + SoftwareApplication，便于搜索引擎与 AI 模型理解站点。
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': new URL('/#website', site).href,
+			name: t(seo.siteName, locale),
+			url: site.href,
+			description,
+			inLanguage: lang,
+		},
+		{
+			'@type': 'SoftwareApplication',
+			'@id': new URL('/#app', site).href,
+			name: t(seo.siteName, locale),
+			url: site.href,
+			description,
+			applicationCategory: seo.appCategory,
+			operatingSystems: siteConfig.downloads.items.map((item) => t(item.label, 'en')).join(', '),
+			downloadPage: new URL('/#download', site).href,
+		},
+	],
+};
+---
+
+<DefaultHead />
+<meta name="robots" content={robotsContent} />
+{keywords && <meta name="keywords" content={keywords} />}
+{seo.googleSiteVerification && <meta name="google-site-verification" content={seo.googleSiteVerification} />}
+{seo.bingSiteVerification && <meta name="msvalidate.01" content={seo.bingSiteVerification} />}
+
+<meta property="og:image" content={ogImage.href} />
+<meta property="og:image:width" content={String(seo.ogImageWidth ?? 1200)} />
+<meta property="og:image:height" content={String(seo.ogImageHeight ?? 630)} />
+{otherOgLocales.map((alt) => <meta property="og:locale:alternate" content={alt} />)}
+
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage.href} />
+{seo.twitterHandle && <meta name="twitter:site" content={seo.twitterHandle} />}
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<!-- Tawk.to 在线客服：embedSrc 配置在 site.ts 的 `tawk` 中，留空则不注入。 -->
+{
+	siteConfig.tawk.embedSrc && (
+		<>
+			<script is:inline>
+				var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+			</script>
+			<script is:inline async src={siteConfig.tawk.embedSrc} charset="UTF-8" crossorigin="*" />
+		</>
+	)
+}
+
+<!-- 浏览器语言自动适配（匹配表配置在 site.ts 的 localeDefs.browserTags）：
+     - 访问默认语言首页（/）时按 navigator.languages 匹配语言版本并跳转；
+     - localStorage 记录 { locale, sig, manual }：sig 为当时 navigator.languages 的签名。
+       · 自动匹配（manual=false）：每次访问 / 都重新跟随浏览器语言（含浏览器语言变更后）；
+       · 手动切换语言（manual=true）：浏览器语言未变时永久尊重所选语言，
+         访问 / 直达所选语言首页；浏览器语言变更后重新自动适配；
+       · 旧版纯字符串标记视为过期，触发重新适配；
+     - 直接访问特定语言 URL（如 /zh-tw/）不做跳转，尊重显式意图；
+     - 爬虫（无法匹配或 en）写入 en 标记，停留在原始页面，SEO 不受影响。 -->
+<script is:inline define:vars={{ localeBrowserTags, localeHomePaths, localizedLocaleKeys }}>
+	function bcReadPref() {
+		try {
+			var raw = window.localStorage.getItem('bc-locale');
+			if (!raw) return null;
+			var parsed = JSON.parse(raw);
+			if (parsed && parsed.locale) return parsed;
+			// 旧版格式（纯字符串 locale）：视为无签名，触发重新适配。
+			return { locale: raw, sig: null };
+		} catch (e) {
+			return null;
+		}
+	}
+	function bcWritePref(locale, manual) {
+		try {
+			var sig = navigator.languages ? navigator.languages.join(',') : '';
+			window.localStorage.setItem(
+				'bc-locale',
+				JSON.stringify({ locale: locale, sig: sig, manual: manual === true }),
+			);
+		} catch (e) { /* 存储不可用时忽略 */ }
+	}
+
+	// define:vars 注入的是 JSON 字符串，这里解析为对象后使用。
+	var LOCALE_TAGS = JSON.parse(localeBrowserTags); // { localeKey: [浏览器语言标签, ...] }
+	var HOME_PATHS = JSON.parse(localeHomePaths); // { 首页路径: localeKey }
+	var LOCALIZED_KEYS = JSON.parse(localizedLocaleKeys); // 带前缀的语言键
+
+	// 沿浏览器语言标签的继承链逐级匹配（zh-hant-tw → zh-hant → zh），与 i18n.ts 的 matchBrowserLocale 一致。
+	function bcMatchLocale(languages) {
+		for (var i = 0; i < languages.length; i++) {
+			var parts = String(languages[i] || '').toLowerCase().split('-');
+			while (parts.length > 0) {
+				var tag = parts.join('-');
+				for (var locale in LOCALE_TAGS) {
+					if (LOCALE_TAGS[locale].indexOf(tag) !== -1) return locale;
+				}
+				parts.pop();
+			}
+		}
+		return null;
+	}
+
+	// 访问默认语言首页时的适配规则：
+	// - 用户手动选择过语言且浏览器语言未变 → 直达所选语言首页（永久尊重手动选择）；
+	// - 其余情况（首次访问 / 自动匹配 / 浏览器语言已变更）→ 重新跟随浏览器语言。
+	function bcApplyLocalePreference() {
+		var homeLocale = HOME_PATHS[location.pathname.replace(/\/?$/, '/')];
+		if (homeLocale !== 'en') return;
+
+		var pref = bcReadPref();
+		var sig = navigator.languages ? navigator.languages.join(',') : '';
+		if (pref && pref.sig === sig && pref.manual) {
+			if (pref.locale !== 'en') {
+				location.replace('/' + pref.locale + '/');
+			}
+			return;
+		}
+
+		var languages =
+			navigator.languages && navigator.languages.length > 0
+				? navigator.languages
+				: [navigator.language || 'en'];
+		var matched = bcMatchLocale(languages) || 'en';
+		bcWritePref(matched, false);
+		if (matched !== 'en') {
+			location.replace('/' + matched + '/');
+		}
+	}
+
+	// 用户通过语言选择器（select，value 为站内 URL）手动切换语言时，记住所选语言
+	// 与当前浏览器语言签名（manual=true，浏览器语言未变则永久尊重）。
+	document.addEventListener('change', function (event) {
+		var select = event.target;
+		if (!(select instanceof HTMLSelectElement)) return;
+		var value = select.value;
+		if (typeof value !== 'string' || value.charAt(0) !== '/') return;
+		var segment = value.split('/')[1];
+		bcWritePref(LOCALIZED_KEYS.indexOf(segment) !== -1 ? segment : 'en', true);
+	});
+
+	// 暴露到 window，便于在控制台验证语言映射（如 bcMatchLocale(['zh-TW'])）。
+	window.bcMatchLocale = bcMatchLocale;
+	window.bcApplyLocalePreference = bcApplyLocalePreference;
+
+	bcApplyLocalePreference();
+</script>

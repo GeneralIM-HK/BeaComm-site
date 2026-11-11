@@ -1,0 +1,40 @@
+---
+# title：純文字，用於 <head> 的 <title>、og:title 等元資訊。
+# hero.title：頁面 H1 展示文案，支援 HTML（如 <sup> 上標），不填時回退到 title。
+title: BeaComm (Beta) - 私有化聊天伺服器
+description: 私有化部署的聊天伺服器軟件
+
+template: splash # 刪除或註解這一行即可在頁面上顯示側邊欄。
+
+hero:
+  title: 'BeaComm<sup>Beta</sup> - 私有化安全聊天伺服器'
+  tagline: 一行指令，即刻啟動你自己的聊天伺服器
+  image:
+    file: ../../../assets/houston.webp
+  actions:
+    - text: 立即開始
+      link: /zh-hk/#pricing
+      icon: right-arrow
+
+    - text: 閱讀文件
+      link: /zh-hk/intro/install-server/
+      # icon: external
+      variant: minimal
+
+---
+
+import RunCodeSection from '../../../components/RunCodeSection.astro';
+import FeaturesSection from '../../../components/FeaturesSection.astro';
+import PricingSection from '../../../components/PricingSection.astro';
+import DownloadSection from '../../../components/DownloadSection.astro';
+import ContactSection from '../../../components/ContactSection.astro';
+
+<RunCodeSection />
+
+<FeaturesSection />
+
+<PricingSection />
+
+<DownloadSection />
+
+<ContactSection />

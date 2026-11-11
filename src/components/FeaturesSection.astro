@@ -1,0 +1,52 @@
+---
+/**
+ * 功能特性区块：Starlight CardGrid 卡片。
+ * 内容在 src/config/site.ts 的 `features` 中配置（icon / title / body），
+ * body 支持 `行内代码` 与 [文字](链接) 两种行内写法。
+ * 注：此处不使用 not-content，卡片内文字沿用 markdown 内容样式，与原 MDX 写法渲染一致。
+ */
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { siteConfig } from '../config/site';
+import { resolveSiteLocale, t } from '../lib/i18n';
+import { renderInline } from '../lib/inline';
+
+const locale = resolveSiteLocale(Astro.locals.starlightRoute.locale);
+const { title, description, items } = siteConfig.features;
+---
+
+<section class="bc-section bc-features" id="features">
+	<h2>{t(title, locale)}</h2>
+	<p class="bc-section-desc">{t(description, locale)}</p>
+	<CardGrid>
+		{
+			items.map((item) => (
+				<Card title={t(item.title, locale)} icon={item.icon}>
+					<p set:html={renderInline(t(item.body, locale), locale)} />
+				</Card>
+			))
+		}
+	</CardGrid>
+</section>
+
+<style>
+	.bc-section {
+		margin-block: 3rem;
+	}
+	.bc-section h2 {
+		margin: 0;
+		font-size: var(--sl-text-3xl);
+		font-weight: 600;
+		line-height: var(--sl-line-height-headings);
+		color: var(--sl-color-white);
+		text-align: center;
+	}
+	.bc-features :global(.card-grid) {
+		margin-top: 2rem;
+	}
+	.bc-section-desc {
+		margin: 0.75rem auto 0;
+		max-width: 44rem;
+		text-align: center;
+		color: var(--sl-color-gray-2);
+	}
+</style>

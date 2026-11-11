@@ -1,0 +1,14 @@
+{
+	// Cloudflare Workers 静态资产部署配置：
+	// CI 中的部署命令 `npx wrangler deploy` 读取本文件，把 dist/ 目录整体发布为 Worker 静态站点。
+	// name：部署后的 Worker 名称，站点地址为 https://<name>.<账户>.workers.dev，也可在控制台绑定自定义域名。
+	// "name": "beacomm-site",
+	// wrangler.jsonc
+	"name": "gentle-salad-62c2",
+	"compatibility_date": "2026-10-01",
+	"assets": {
+		"directory": "./dist",
+		// 未匹配到的路径返回 dist/404.html（多语言 404 页已构建在该文件）。
+		"not_found_handling": "404-page"
+	}
+}

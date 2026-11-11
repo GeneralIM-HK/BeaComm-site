@@ -1,0 +1,37 @@
+---
+/**
+ * 页脚覆盖：在 Starlight 原生页脚（编辑链接 / 最后更新 / 上下页导航）之下，
+ * 追加站点栏目链接、友情链接与 copyright。
+ * 内容在 src/config/site.ts 的 `footer` 中配置。
+ */
+import EditLink from 'virtual:starlight/components/EditLink';
+import LastUpdated from 'virtual:starlight/components/LastUpdated';
+import Pagination from 'virtual:starlight/components/Pagination';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const { pagination } = Astro.locals.starlightRoute;
+const hasMeta = Boolean(pagination.prev || pagination.next);
+---
+
+{
+	hasMeta && (
+		<div class="bc-footer-meta sl-flex">
+			<EditLink />
+			<LastUpdated />
+		</div>
+	)
+}
+<Pagination />
+<SiteFooter />
+
+<style>
+	.bc-footer-meta {
+		gap: 0.75rem 3rem;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-top: 3rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+</style>
+

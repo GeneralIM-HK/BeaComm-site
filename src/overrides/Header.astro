@@ -1,0 +1,291 @@
+---
+/**
+ * 顶部导航栏覆盖：Logo + 标题 + 站内区块导航（Feature / Pricing / Download / Contact）在左，
+ * 搜索框在整条导航栏水平居中（宽度约为屏幕的 20%），
+ * 右侧为社交图标、主题切换与多语言切换（多语言由 locales 配置自动启用）。
+ * 基于 Starlight 内置 Header 结构修改。
+ *
+ * 移动端适配：窄屏（< 72rem）下站内导航隐藏，搜索按钮右侧显示汉堡菜单按钮，
+ * 点击展开全宽下拉面板，包含站内导航链接与语言 / 明暗切换（多语言与主题控件复用 Starlight 组件）。
+ *
+ * 导航项与文案在 src/config/site.ts 的 `nav` 中配置。
+ */
+import config from 'virtual:starlight/user-config';
+import { Icon } from '@astrojs/starlight/components';
+
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+
+import { siteConfig } from '../config/site';
+import { localizeHref, resolveSiteLocale, t, tText } from '../lib/i18n';
+
+/**
+ * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
+ */
+const shouldRenderSearch =
+	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+
+const locale = resolveSiteLocale(Astro.locals.starlightRoute.locale);
+const navItems = siteConfig.nav.items.map((item) => ({
+	label: t(item.label, locale),
+	href: localizeHref(`/#${tText(item.anchor, locale)}`, locale),
+}));
+
+const isZh = locale?.startsWith('zh') ?? false;
+const menuLabel = isZh ? '菜单' : 'Menu';
+---
+
+<div class="header">
+	<div class="start-group sl-flex">
+		<div class="title-wrapper sl-flex">
+			<SiteTitle />
+		</div>
+		<nav class="header-nav print:hidden" aria-label={t(siteConfig.nav.label, locale)}>
+			{navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+		</nav>
+	</div>
+	<div class="search-slot sl-flex print:hidden">
+		{shouldRenderSearch && <Search />}
+	</div>
+	<div class="sl-hidden md:sl-flex print:hidden right-group">
+		<div class="sl-hidden lg:sl-flex social-icons">
+			<SocialIcons />
+		</div>
+		<ThemeSelect />
+		<LanguageSelect />
+	</div>
+	<button class="menu-toggle print:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label={menuLabel} data-menu-toggle>
+		<Icon name="bars" class="icon-open" />
+		<Icon name="close" class="icon-close" />
+	</button>
+	<div class="mobile-menu print:hidden" id="mobile-menu" data-mobile-menu>
+		<nav aria-label={t(siteConfig.nav.label, locale)}>
+			{navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+		</nav>
+		<div class="menu-extras sl-flex">
+			<LanguageSelect />
+			<ThemeSelect />
+		</div>
+	</div>
+</div>
+
+<style>
+	@layer starlight.core {
+		.header {
+			display: flex;
+			gap: var(--sl-nav-gap);
+			justify-content: flex-start;
+			align-items: center;
+			height: 100%;
+			position: relative;
+		}
+
+		.start-group {
+			align-items: center;
+			gap: var(--sl-nav-gap);
+			min-width: 0;
+		}
+
+		.title-wrapper {
+			/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
+			overflow: clip;
+			/* Avoid clipping focus ring around link inside title wrapper. */
+			padding: 0.25rem;
+			margin: -0.25rem;
+			min-width: 0;
+		}
+
+		/* 站内区块导航：标题右侧，桌面宽屏显示。 */
+		.header-nav {
+			display: none;
+			align-items: center;
+			gap: 1.25rem;
+		}
+		.header-nav a {
+			color: var(--sl-color-gray-2);
+			font-size: var(--sl-text-sm);
+			text-decoration: none;
+			white-space: nowrap;
+		}
+		.header-nav a:hover {
+			color: var(--sl-color-white);
+		}
+		.header-nav a:focus-visible {
+			outline: 2px solid var(--sl-color-text-accent);
+			outline-offset: 0.25rem;
+			border-radius: 0.25rem;
+		}
+		@media (min-width: 72rem) {
+			.header-nav {
+				display: flex;
+			}
+		}
+
+		/* 搜索框在导航栏中水平居中（桌面端），宽度约为屏幕的 20%。 */
+		@media (min-width: 50rem) {
+			.search-slot {
+				position: absolute;
+				inset-inline-start: 50%;
+				transform: translateX(-50%);
+				width: 20vw;
+			}
+		}
+
+		.right-group,
+		.social-icons {
+			gap: 1rem;
+			align-items: center;
+		}
+		.social-icons::after {
+			content: '';
+			height: 2rem;
+			border-inline-end: 1px solid var(--sl-color-gray-5);
+		}
+
+		/* ---- 移动端：汉堡菜单按钮与下拉面板 ---- */
+
+		.right-group {
+			/* 始终靠右：桌面端在最右，窄屏时为搜索与菜单按钮让出空间。 */
+			margin-inline-start: auto;
+		}
+		/* 窄屏下搜索按钮紧贴菜单按钮，置于最右侧。 */
+		@media (max-width: 49.99rem) {
+			.search-slot {
+				margin-inline-start: auto;
+			}
+		}
+
+		.menu-toggle {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0.375rem;
+			margin: -0.375rem;
+			border: 0;
+			background: transparent;
+			color: var(--sl-color-gray-2);
+			cursor: pointer;
+		}
+		.menu-toggle:hover {
+			color: var(--sl-color-white);
+		}
+		.menu-toggle:focus-visible {
+			outline: 2px solid var(--sl-color-text-accent);
+			outline-offset: 0.25rem;
+			border-radius: 0.25rem;
+		}
+		.menu-toggle :global(svg) {
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+		/* 图标随展开状态切换：三条线 ↔ 关闭。 */
+		.menu-toggle :global(.icon-close) {
+			display: none;
+		}
+		.menu-toggle[aria-expanded='true'] :global(.icon-open) {
+			display: none;
+		}
+		.menu-toggle[aria-expanded='true'] :global(.icon-close) {
+			display: block;
+		}
+		@media (min-width: 72rem) {
+			.menu-toggle {
+				display: none;
+			}
+		}
+
+		/* 下拉面板：固定定位的导航栏正下方，全宽展开。 */
+		.mobile-menu {
+			display: none;
+			position: absolute;
+			top: 100%;
+			inset-inline: calc(-1 * var(--sl-nav-pad-x));
+			max-height: calc(100vh - var(--sl-nav-height));
+			overflow-y: auto;
+			background-color: var(--sl-color-bg);
+			border-bottom: 1px solid var(--sl-color-hairline-shade);
+			box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 0.15);
+		}
+		.mobile-menu.open {
+			display: block;
+			animation: bc-menu-in 0.15s ease-out;
+		}
+		@keyframes bc-menu-in {
+			from {
+				opacity: 0;
+				transform: translateY(-0.375rem);
+			}
+		}
+		@media (min-width: 72rem) {
+			.mobile-menu {
+				display: none !important;
+			}
+		}
+
+		.mobile-menu nav {
+			display: flex;
+			flex-direction: column;
+			padding: 0.75rem 1.25rem 1rem;
+		}
+		.mobile-menu nav a {
+			padding: 0.625rem 0.5rem;
+			color: var(--sl-color-gray-2);
+			font-size: 1rem;
+			text-decoration: none;
+			border-radius: 0.25rem;
+		}
+		.mobile-menu nav a:hover {
+			color: var(--sl-color-white);
+			background-color: var(--sl-color-gray-8, rgb(255 255 255 / 0.06));
+		}
+		.mobile-menu nav a:focus-visible {
+			outline: 2px solid var(--sl-color-text-accent);
+			outline-offset: -2px;
+		}
+
+		/* 面板内的语言 / 明暗切换：仅在中屏以下显示（中屏起导航栏右侧已有同款控件）。 */
+		.menu-extras {
+			flex-wrap: wrap;
+			gap: 0.5rem 1.5rem;
+			align-items: center;
+			padding: 0.75rem 1.75rem 1rem;
+			border-top: 1px solid var(--sl-color-hairline-shade);
+		}
+		@media (min-width: 48rem) {
+			.menu-extras {
+				display: none;
+			}
+		}
+	}
+</style>
+
+<script>
+	// 移动端菜单开合：点击汉堡按钮切换；点击导航链接、按 Esc 或窗口放大到桌面宽度时收起。
+	const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+	const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+	if (toggle && menu) {
+		const desktop = matchMedia('(min-width: 72rem)');
+
+		const setOpen = (open: boolean) => {
+			menu.classList.toggle('open', open);
+			toggle.setAttribute('aria-expanded', String(open));
+		};
+
+		toggle.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+		menu.addEventListener('click', (e) => {
+			if (e.target instanceof Element && e.target.closest('a')) setOpen(false);
+		});
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && menu.classList.contains('open')) {
+				setOpen(false);
+				toggle.focus();
+			}
+		});
+		desktop.addEventListener('change', (e) => {
+			if (e.matches) setOpen(false);
+		});
+	}
+</script>

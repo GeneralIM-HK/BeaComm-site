@@ -1,0 +1,133 @@
+---
+/**
+ * 联系方式区块。卡片在 src/config/site.ts 的 `contact.cards` 中配置，
+ * 每张卡片可带多个操作按钮，按需增删即可。
+ */
+import { siteConfig } from '../config/site';
+import { isExternalHref, localizeHref, resolveSiteLocale, t } from '../lib/i18n';
+import BcIcon from './BcIcon.astro';
+
+const locale = resolveSiteLocale(Astro.locals.starlightRoute.locale);
+const { title, description, cards } = siteConfig.contact;
+---
+
+<section class="bc-section bc-contact not-content" id="contact">
+	<h2>{t(title, locale)}</h2>
+	<p class="bc-section-desc">{t(description, locale)}</p>
+	<div class="bc-contact-grid">
+		{
+			cards.map((card) => (
+				<article class="bc-contact-card">
+					<div class="bc-contact-head">
+						<div class="bc-contact-icon">
+							<BcIcon name={card.icon} svg={card.iconSvg} size="1.35rem" />
+						</div>
+						<h3>{t(card.title, locale)}</h3>
+					</div>
+					{card.description && <p class="bc-contact-desc">{t(card.description, locale)}</p>}
+					<div class="bc-contact-links">
+						{card.links.map((link) => {
+							const href = localizeHref(link.href, locale);
+							const external = link.external ?? isExternalHref(href);
+							return (
+								<a
+									class="bc-contact-btn"
+									href={href}
+									rel={external ? 'noopener noreferrer' : undefined}
+									target={external ? '_blank' : undefined}
+								>
+									{t(link.label, locale)}
+								</a>
+							);
+						})}
+					</div>
+				</article>
+			))
+		}
+	</div>
+</section>
+
+<style>
+	.bc-section {
+		margin-block: 3rem;
+	}
+	.bc-section h2 {
+		margin: 0;
+		font-size: var(--sl-text-3xl);
+		font-weight: 600;
+		line-height: var(--sl-line-height-headings);
+		color: var(--sl-color-white);
+		text-align: center;
+	}
+	.bc-section-desc {
+		margin: 0.75rem auto 0;
+		max-width: 44rem;
+		text-align: center;
+		color: var(--sl-color-gray-2);
+	}
+
+	.bc-contact-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+		gap: 1.25rem;
+		margin-top: 2rem;
+	}
+
+	.bc-contact-card {
+		display: flex;
+		flex-direction: column;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 0.75rem;
+		padding: 1.25rem 1.25rem 1.4rem;
+		background: var(--sl-color-bg);
+	}
+	.bc-contact-head {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+	}
+	.bc-contact-icon {
+		display: grid;
+		place-items: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 0.65rem;
+		background: color-mix(in oklab, var(--sl-color-text-accent) 12%, var(--sl-color-bg));
+		color: var(--sl-color-text-accent);
+	}
+	.bc-contact-card h3 {
+		margin: 0;
+		font-size: var(--sl-text-lg);
+		font-weight: 600;
+		line-height: var(--sl-line-height-headings);
+		color: var(--sl-color-white);
+	}
+	.bc-contact-desc {
+		margin: 0.75rem 0 1rem;
+		font-size: var(--sl-text-sm);
+		line-height: 1.6;
+		color: var(--sl-color-gray-2);
+		flex: 1;
+	}
+	.bc-contact-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.bc-contact-btn {
+		display: inline-flex;
+		align-items: center;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 999rem;
+		padding: 0.35rem 0.85rem;
+		font-size: var(--sl-text-sm);
+		line-height: 1.4;
+		color: var(--sl-color-white);
+		text-decoration: none;
+		transition: border-color 0.15s ease;
+	}
+	.bc-contact-btn:hover {
+		border-color: var(--sl-color-text-accent);
+		color: var(--sl-color-white);
+	}
+</style>

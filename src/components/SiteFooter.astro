@@ -1,0 +1,119 @@
+---
+/**
+ * 站点页脚：栏目链接 + 友情链接 + copyright。
+ * 内容在 src/config/site.ts 的 `footer` 中配置，内部链接自动加当前语言前缀。
+ */
+import { siteConfig } from '../config/site';
+import { fillCopyright, isExternalHref, localizeHref, resolveSiteLocale, t } from '../lib/i18n';
+
+const locale = resolveSiteLocale(Astro.locals.starlightRoute.locale);
+const { columns, friends, copyright } = siteConfig.footer;
+---
+
+<div class="bc-footer">
+	<div class="bc-footer-grid">
+		{
+			columns.map((column) => (
+				<nav class="bc-footer-col" aria-label={t(column.title, locale)}>
+					<h3>{t(column.title, locale)}</h3>
+					<ul>
+						{column.links.map((link) => {
+							const href = localizeHref(link.href, locale);
+							const external = link.external ?? isExternalHref(href);
+							return (
+								<li>
+									<a
+										href={href}
+										rel={external ? 'noopener noreferrer' : undefined}
+										target={external ? '_blank' : undefined}
+									>
+										{t(link.label, locale)}
+									</a>
+								</li>
+							);
+						})}
+					</ul>
+				</nav>
+			))
+		}
+	</div>
+
+	<div class="bc-footer-friends">
+		<h3>{t(friends.title, locale)}</h3>
+		<ul>
+			{
+				friends.links.map((link) => (
+					<li>
+						<a href={link.href} rel="noopener noreferrer" target="_blank">
+							{t(link.label, locale)}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+
+	<div class="bc-footer-copyright">
+		<p>{fillCopyright(t(copyright, locale))}</p>
+	</div>
+</div>
+
+<style>
+	.bc-footer {
+		margin-top: 4rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--sl-color-hairline);
+		font-size: var(--sl-text-sm);
+	}
+	.bc-footer h3 {
+		margin: 0 0 0.85rem;
+		font-size: var(--sl-text-sm);
+		font-weight: 600;
+		color: var(--sl-color-white);
+	}
+	.bc-footer ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.bc-footer li {
+		margin: 0;
+	}
+	.bc-footer a {
+		color: var(--sl-color-gray-2);
+		text-decoration: none;
+	}
+	.bc-footer a:hover {
+		color: var(--sl-color-white);
+	}
+
+	.bc-footer-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+		gap: 1.5rem;
+	}
+
+	.bc-footer-friends {
+		margin-top: 2rem;
+	}
+	.bc-footer-friends ul {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.25rem;
+	}
+
+	.bc-footer-copyright {
+		margin-top: 2rem;
+		padding-top: 1.25rem;
+		border-top: 1px solid var(--sl-color-hairline);
+		text-align: center;
+	}
+	.bc-footer-copyright p {
+		margin: 0;
+		color: var(--sl-color-gray-3);
+		font-size: var(--sl-text-xs);
+	}
+</style>

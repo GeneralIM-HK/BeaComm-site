@@ -1,0 +1,51 @@
+---
+/**
+ * 站点图标组件：优先使用 Starlight 内置图标（见 src/config/site.ts 中的注释），
+ * 内置库里没有的（如 Windows 徽标）由下面的 EXTRA_ICONS 补充，
+ * 也可以在配置里直接传 `svg`（一段 <path> 等 SVG 内容，viewBox 为 0 0 24 24）。
+ */
+import { Icon } from '@astrojs/starlight/components';
+
+interface Props {
+	name?: string;
+	svg?: string;
+	size?: string;
+	class?: string;
+}
+
+const { name, svg, size = '1.5rem', class: className } = Astro.props;
+
+const EXTRA_ICONS: Record<string, string> = {
+	windows:
+		'<path d="M3 5.55 10.7 4.44v7.06H3V5.55Zm8.8-1.24L21 3v8.5h-9.2V4.31ZM3 12.5h7.7v7.06L3 18.45V12.5Zm8.8 0H21V21l-9.2-1.31V12.5Z"/>',
+};
+
+const extraPath = (name && EXTRA_ICONS[name]) || svg;
+const builtinName = !extraPath ? name : undefined;
+---
+
+{
+	extraPath ? (
+		<svg
+			class={className}
+			aria-hidden="true"
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="currentColor"
+			style={`font-size:${size}`}
+			set:html={extraPath}
+		/>
+	) : builtinName ? (
+		<Icon name={builtinName as any} size={size} class={className} />
+	) : null
+}
+
+<style>
+	svg {
+		width: 1em;
+		height: 1em;
+		flex-shrink: 0;
+		overflow: visible;
+	}
+</style>
