@@ -699,7 +699,7 @@ const contact = {
 		'zh-tw': '聯絡我們',
 	},
 	description: {
-		en: 'Questions about pricing, licensing or deployment? Reach us anywhere.',
+		en: 'Questions about pricing, licensing or deployment? Reach us anytime.',
 		'zh-cn': '关于价格、授权或部署的任何问题，欢迎随时联系我们。',
 		'zh-hk': '關於價格、授權或部署的任何問題，歡迎隨時聯絡我們。',
 		'zh-tw': '關於價格、授權或部署的任何問題，歡迎隨時聯絡我們。',
