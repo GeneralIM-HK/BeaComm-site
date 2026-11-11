@@ -275,7 +275,7 @@ const runCode = {
 		'zh-hk': '複製下方指令，在終端機上運行，即可安裝 BeaComm 伺服器軟體。',
 		'zh-tw': '複製下方指令，在終端機上執行，即可安裝 BeaComm 伺服器軟體。',
 	},
-	code: '/bin/bash -c "$(curl -fsSL https://www.example.com/BeaComm/install.sh)"',
+	code: '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/GeneralIM-HK/BeaComm-install/HEAD/install.sh)"',
 	lang: 'shell',
 	// 看不懂命令的用户可以点击前往文档；不需要时删除 link 即可隐藏。
 	link: {
