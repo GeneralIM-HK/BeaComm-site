@@ -18,7 +18,13 @@ Open a terminal on your server and run:
 When the installation finishes, the terminal prints the address clients use to connect:
 
 ```
-http://123.123.123.123:2443
+http://123.123.123.123
+```
+
+If you have specified a port yourself, you must include the port number when entering the address:
+
+```
+http://123.123.123.123:<your-port-number>
 ```
 
 ## Get the client apps
