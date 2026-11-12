@@ -10,7 +10,7 @@ BeaComm (Beacon + Communication) is a lightweight, self-hosted chat server that 
 Open a terminal on your server and run:
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://www.example.com/BeaComm/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/GeneralIM-HK/BeaComm-install/HEAD/install.sh)"
 ```
 
 ## Get your server address

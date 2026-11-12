@@ -420,53 +420,53 @@ const pricing = {
 		'zh-tw': '使用新創版免費起步，團隊壯大後隨時升級到商業版，如需可客製化企業版。',
 	},
 	plans: [
-		// {
-		// 	id: 'startup',
-		// 	name: {
-		// 		en: 'Start Up',
-		// 		'zh-cn': '初创版',
-		// 		'zh-hk': '初創版',
-		// 		'zh-tw': '新創版',
-		// 	},
-		// 	description: {
-		// 		en: 'For individuals and small startup teams.',
-		// 		'zh-cn': '适合个人使用或小型初创团队。',
-		// 		'zh-hk': '適合個人或小型初創團隊。',
-		// 		'zh-tw': '適合個人或小型新創團隊。',
-		// 	},
-		// 	price: { en: 'Free', 'zh-cn': '免费', 'zh-hk': '免費', 'zh-tw': '免費' },
-		// 	priceNote: { en: 'forever', 'zh-cn': '永久', 'zh-hk': '永久', 'zh-tw': '永久' },
-		// 	features: [
-		// 		{
-		// 			en: 'Unlimited messages and chat history',
-		// 			'zh-cn': '不限消息数量与聊天记录',
-		// 			'zh-hk': '不限訊息數量與聊天記錄',
-		// 			'zh-tw': '不限訊息數量與聊天記錄',
-		// 		},
-		// 		{
-		// 			en: 'Up to 50 members per server',
-		// 			'zh-cn': '单服务器最多 50 名成员',
-		// 			'zh-hk': '單伺服器最多 50 名成員',
-		// 			'zh-tw': '單一伺服器最多 50 名成員',
-		// 		},
-		// 		{
-		// 			en: 'All platform clients (iOS, Android, Windows, macOS)',
-		// 			'zh-cn': '全平台客户端（iOS、Android、Windows、macOS）',
-		// 			'zh-hk': '全平台用戶端（iOS、Android、Windows、macOS）',
-		// 			'zh-tw': '全平台用戶端（iOS、Android、Windows、macOS）',
-		// 		},
-		// 		{
-		// 			en: 'Email and live chat support on our website',
-		// 			'zh-cn': '邮件与官网 Live Chat 支持',
-		// 			'zh-hk': '電郵與官網 Live Chat 支援',
-		// 			'zh-tw': '電郵與官網 Live Chat 支援',
-		// 		},
-		// 	],
-		// 	cta: {
-		// 		label: { en: 'Deploy Now', 'zh-cn': '立即部署', 'zh-hk': '立即部署', 'zh-tw': '立即部署' },
-		// 		href: '#install',
-		// 	},
-		// },
+		{
+			id: 'startup',
+			name: {
+				en: 'Start Up',
+				'zh-cn': '初创版',
+				'zh-hk': '初創版',
+				'zh-tw': '新創版',
+			},
+			description: {
+				en: 'For individuals and small startup teams.',
+				'zh-cn': '适合个人使用或小型初创团队。',
+				'zh-hk': '適合個人或小型初創團隊。',
+				'zh-tw': '適合個人或小型新創團隊。',
+			},
+			price: { en: 'Free', 'zh-cn': '免费', 'zh-hk': '免費', 'zh-tw': '免費' },
+			priceNote: { en: 'forever', 'zh-cn': '永久', 'zh-hk': '永久', 'zh-tw': '永久' },
+			features: [
+				{
+					en: 'Unlimited messages and chat history',
+					'zh-cn': '不限消息数量与聊天记录',
+					'zh-hk': '不限訊息數量與聊天記錄',
+					'zh-tw': '不限訊息數量與聊天記錄',
+				},
+				{
+					en: 'Up to 5 members per server',
+					'zh-cn': '单服务器最多 5 名成员',
+					'zh-hk': '單伺服器最多 5 名成員',
+					'zh-tw': '單一伺服器最多 5 名成員',
+				},
+				{
+					en: 'All platform clients (iOS, Android, Windows, macOS)',
+					'zh-cn': '全平台客户端（iOS、Android、Windows、macOS）',
+					'zh-hk': '全平台用戶端（iOS、Android、Windows、macOS）',
+					'zh-tw': '全平台用戶端（iOS、Android、Windows、macOS）',
+				},
+				{
+					en: 'Email and live chat support on our website',
+					'zh-cn': '邮件与官网 Live Chat 支持',
+					'zh-hk': '電郵與官網 Live Chat 支援',
+					'zh-tw': '電郵與官網 Live Chat 支援',
+				},
+			],
+			cta: {
+				label: { en: 'Deploy Now', 'zh-cn': '立即部署', 'zh-hk': '立即部署', 'zh-tw': '立即部署' },
+				href: '#install',
+			},
+		},
 		{
 			id: 'business',
 			name: {

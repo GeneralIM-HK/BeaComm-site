@@ -10,7 +10,7 @@ BeaComm（Beacon + Communication）是一款輕量、開箱即用的私有化聊
 登入伺服器，開啟終端機，執行以下指令：
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://www.example.com/BeaComm/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/GeneralIM-HK/BeaComm-install/HEAD/install.sh)"
 ```
 
 ## 取得伺服器接入位址
