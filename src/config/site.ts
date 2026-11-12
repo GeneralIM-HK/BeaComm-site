@@ -633,15 +633,15 @@ const downloads = {
 			links: [
 				{
 					// label: { en: 'Google Play', 'zh-cn': 'Google Play', 'zh-hk': 'Google Play', 'zh-tw': 'Google Play' },
-					label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
+					label: { en: 'Google Play Coming soon', 'zh-cn': 'Google Play 即将推出', 'zh-hk': 'Google Play 即將推出', 'zh-tw': 'Google Play 即將推出' },
 					// href: 'https://play.google.com/',
 					href: '/#download',
 					// external: true,
 				},
-				// {
-				// 	label: { en: 'Download APK', 'zh-cn': '下载 APK', 'zh-hk': '下載 APK', 'zh-tw': '下載 APK' },
-				// 	href: '/downloads/BeaComm-android.apk',
-				// },
+				{
+					label: { en: 'Download APK', 'zh-cn': '下载 APK', 'zh-hk': '下載 APK', 'zh-tw': '下載 APK' },
+					href: 'https://file.beacomm.chat/pac/beacomm-android-latest.apk',
+				},
 			],
 		},
 		{
@@ -653,8 +653,8 @@ const downloads = {
 				{
 					// label: { en: 'Windows 10/11', 'zh-cn': 'Windows 10/11', 'zh-hk': 'Windows 10/11', 'zh-tw': 'Windows 10/11' },
 					label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
-					href: 'https://www.microsoft.com/store',
-					external: true,
+					href: '/#download',
+					// external: true,
 				},
 				// {
 				// 	label: { en: 'Windows 7/8', 'zh-cn': 'Windows 7/8', 'zh-hk': 'Windows 7/8', 'zh-tw': 'Windows 7/8' },
