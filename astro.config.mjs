@@ -32,7 +32,7 @@ export default defineConfig({
 			
 			// Logo shown next to the site title in the header. Replace this file to change it.
 			logo: { src: './src/assets/logo.svg', alt: 'BeaComm logo' },
-			
+			favicon: '/favicon.ico',
 			social: [
 				// { icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' },
 				// { icon: 'x.com', label: 'GitHub', href: 'https://github.com/withastro/starlight' },
