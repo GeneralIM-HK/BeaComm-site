@@ -124,13 +124,16 @@ const menuLabel = isZh ? '菜单' : 'Menu';
 			}
 		}
 
-		/* 搜索框在导航栏中水平居中（桌面端），宽度约为屏幕的 20%。 */
+		/* 搜索框在导航栏中水平居中（桌面端），宽度约为屏幕的 20%。
+		   上限与 Starlight 搜索按钮的 max-width（22rem）一致，避免超宽屏下
+		   槽位宽于按钮、按钮在槽内左对齐而整体偏离中线。 */
 		@media (min-width: 50rem) {
 			.search-slot {
 				position: absolute;
 				inset-inline-start: 50%;
 				transform: translateX(-50%);
-				width: 20vw;
+				justify-content: center;
+				width: min(20vw, 22rem);
 			}
 		}
 
