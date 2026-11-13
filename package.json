@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "astro": "astro",
-    "deploy": "wrangler deploy"
+    "deploy": "astro build && npx wrangler deploy"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.42.10",
