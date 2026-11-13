@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.42.10",

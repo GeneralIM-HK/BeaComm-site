@@ -5,7 +5,8 @@
 	// "name": "beacomm-site",
 	// wrangler.jsonc
 	"name": "gentle-salad-62c2",
-	"compatibility_date": "2026-10-01",
+	// "main": "src/index.js",
+  	"compatibility_date": "2026-11-11",
 	"assets": {
 		"directory": "./dist",
 		// 未匹配到的路径返回 dist/404.html（多语言 404 页已构建在该文件）。
