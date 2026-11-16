@@ -4,3 +4,4 @@ description: BeaComm 常見問題解答索引。
 ---
 
 - [設定郵件 API 後仍無法寄送驗證碼郵件](/zh-tw/guides/config-email)
+- [如何在 BeaComm App 中删除账号？](/zh-tw/user/delete-account)

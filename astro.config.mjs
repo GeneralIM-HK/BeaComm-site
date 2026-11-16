@@ -86,6 +86,20 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'User',
+					translations: { 'zh-CN': '用户', 'zh-HK': '用户', 'zh-TW': '用户' },
+					items: [
+						// Each item here is one entry in the navigation menu.
+						// label 为默认（英文）文案，translations 按各语言 lang 码提供对应标签；
+						// Reference 组使用 autogenerate，自动采用各语言页面的 frontmatter title。
+						{
+							label: 'Delete Account',
+							slug: 'user/delete-account',
+							translations: { 'zh-CN': '删除您的账号', 'zh-HK': '删除您的账号', 'zh-TW': '删除您的账号' },
+						}
+					],
+				},
+				{
 					label: 'Reference',
 					translations: { 'zh-CN': '参考', 'zh-HK': '參考', 'zh-TW': '參考' },
 					items: [{ autogenerate: { directory: 'reference' } }],
