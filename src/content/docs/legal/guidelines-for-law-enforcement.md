@@ -59,7 +59,7 @@ Unless legally prohibited — for example, by a lawful gag order or in an emerge
 Send law-enforcement requests, clearly identifying your agency, the legal process relied on, and the server or account concerned, to:
 
 **Hong Kong General IM Technology Limited (BeaComm Team)**
-Email: support@beacomm.chat (subject line: "Law Enforcement Request")
-Website: https://www.beacomm.chat
+- Email: support@beacomm.chat (subject line: "Law Enforcement Request")
+- Website: https://www.beacomm.chat
 
 We reserve the right to challenge requests that are overbroad, unlawful, or otherwise improper, and to seek the protection of the courts of Hong Kong.

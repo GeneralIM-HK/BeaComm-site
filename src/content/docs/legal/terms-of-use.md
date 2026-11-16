@@ -110,7 +110,7 @@ You must be at least 13 years old — or the minimum digital-consent age require
 Questions about these Terms may be directed to:
 
 **Hong Kong General IM Technology Limited (BeaComm Team)**
-Email: support@beacomm.chat
-Website: https://www.beacomm.chat
+- Email: support@beacomm.chat
+- Website: https://www.beacomm.chat
 
 For matters concerning your account, your content, or other users' behaviour, please contact the **Server Operator** you connect to.

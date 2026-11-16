@@ -59,7 +59,7 @@ BeaComm 团队可能持有的唯一个人数据，是其自身**客户**（被�
 向执法机关提交请求时，请明确说明您的机关名称、所依据的法律程序，以及所涉及的服务器或账户：
 
 **香港通用即通科技有限公司（BeaComm 团队）**
-邮箱：support@beacomm.chat（主题注明"Law Enforcement Request"）
-网站：https://www.beacomm.chat
+- 邮箱：support@beacomm.chat（主题注明"Law Enforcement Request"）
+- 网站：https://www.beacomm.chat
 
 我们保留对过度宽泛、违法或不当的请求提出异议，并寻求香港法院保护的权利。

@@ -139,5 +139,5 @@ The person accepting these terms represents that they have read and understood t
 Questions about these terms may be directed to:
 
 **Hong Kong General IM Technology Limited (BeaComm Team)**
-Email: support@beacomm.chat
-Website: https://www.beacomm.chat
+- Email: support@beacomm.chat
+- Website: https://www.beacomm.chat

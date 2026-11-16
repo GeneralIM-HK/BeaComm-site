@@ -94,7 +94,7 @@ We may update this policy as the product or our processing changes. Material cha
 The controller for the data described in this policy is:
 
 **Hong Kong General IM Technology Limited (BeaComm Team)**
-Email: support@beacomm.chat
-Website: https://www.beacomm.chat
+- Email: support@beacomm.chat
+- Website: https://www.beacomm.chat
 
 If you are an end user of a BeaComm-powered server and have questions about your data there, please contact the **Server Operator**.

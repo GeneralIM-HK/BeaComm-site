@@ -110,7 +110,7 @@ description: 规范最终用户使用 BeaComm App 的条款。
 如对本条款有任何疑问，请联系：
 
 **香港通用即通科技有限公司（BeaComm 团队）**
-邮箱：support@beacomm.chat
-网站：https://www.beacomm.chat
+- 邮箱：support@beacomm.chat
+- 网站：https://www.beacomm.chat
 
 如涉及您的账户、内容或其他用户的行为，请联系您所连接的**服务器运营方**。

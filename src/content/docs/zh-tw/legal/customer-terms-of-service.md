@@ -139,5 +139,5 @@ description: 規範企業客戶授權及使用 BeaComm 軟體的條款。
 如對本條款有任何疑問，請聯絡：
 
 **香港通用即通科技有限公司（BeaComm 團隊）**
-電子郵件：support@beacomm.chat
-網站：https://www.beacomm.chat
+- 電子郵件：support@beacomm.chat
+- 網站：https://www.beacomm.chat

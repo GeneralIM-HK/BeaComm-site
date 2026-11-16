@@ -139,5 +139,5 @@ description: 规范企业客户许可及使用 BeaComm 软件的条款。
 如对本条款有任何疑问，请联系：
 
 **香港通用即通科技有限公司（BeaComm 团队）**
-邮箱：support@beacomm.chat
-网站：https://www.beacomm.chat
+- 邮箱：support@beacomm.chat
+- 网站：https://www.beacomm.chat

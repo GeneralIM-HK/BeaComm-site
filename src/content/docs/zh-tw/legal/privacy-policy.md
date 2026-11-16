@@ -94,7 +94,7 @@ BeaComm 面向 13 歲以下（或您所在司法管轄區更高最低年齡）�
 本政策所述資料的控管者為：
 
 **香港通用即通科技有限公司（BeaComm 團隊）**
-電子郵件：support@beacomm.chat
-網站：https://www.beacomm.chat
+- 電子郵件：support@beacomm.chat
+- 網站：https://www.beacomm.chat
 
 如果您是某 BeaComm 伺服器的最終使用者，對該伺服器上您的資料有疑問，請聯絡**伺服器營運方**。
