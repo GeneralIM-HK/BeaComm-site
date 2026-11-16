@@ -640,7 +640,7 @@ const downloads = {
 				},
 				{
 					label: { en: 'Download APK', 'zh-cn': '下载 APK', 'zh-hk': '下載 APK', 'zh-tw': '下載 APK' },
-					href: 'https://file.beacomm.chat/pac/beacomm-android-latest.apk',
+					href: 'https://file.beacomm.chat/android/beacomm-android-latest.apk',
 				},
 			],
 		},
@@ -648,12 +648,12 @@ const downloads = {
 			id: 'windows',
 			icon: 'windows',
 			label: { en: 'Windows', 'zh-cn': 'Windows', 'zh-hk': 'Windows', 'zh-tw': 'Windows' },
-			sub: { en: '64-bit', 'zh-cn': '64 位', 'zh-hk': '64 位元', 'zh-tw': '64 位元' },
+			sub: { en: 'Win 10/11 · 64-bit', 'zh-cn': 'Win 10/11 · 64 位', 'zh-hk': 'Win 10/11 · 64 位元', 'zh-tw': 'Win 10/11 · 64 位元' },
 			links: [
 				{
-					// label: { en: 'Windows 10/11', 'zh-cn': 'Windows 10/11', 'zh-hk': 'Windows 10/11', 'zh-tw': 'Windows 10/11' },
-					label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
-					href: '/#download',
+					label: { en: 'Get Installer', 'zh-cn': '获取安装包', 'zh-hk': '取得安裝程式', 'zh-tw': '取得安裝套件' },
+					// label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
+					href: 'https://file.beacomm.chat/win/BeaComm-win-x64-latest.exe',
 					// external: true,
 				},
 				// {
