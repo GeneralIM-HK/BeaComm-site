@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "astro": "astro",
+    "bd": "astro build && npx wrangler deploy",
     "deploy": "wrangler deploy"
   },
   "dependencies": {
