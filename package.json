@@ -4,13 +4,23 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    
     "start": "astro dev",
+    "s": "astro dev",
+    
     "build": "astro build",
+    "b": "astro build",
+    
     "preview": "astro preview",
+    "p": "astro preview",
+    
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "astro": "astro",
-    "bd": "astro build && npx wrangler deploy",
-    "deploy": "wrangler deploy"
+    
+    "deploy": "wrangler deploy",
+    "d": "wrangler deploy",
+
+    "bd": "astro build && npx wrangler deploy"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.42.10",
