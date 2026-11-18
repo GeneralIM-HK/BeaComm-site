@@ -57,8 +57,8 @@ export default defineConfig({
 					items: [{ autogenerate: { directory: 'intro' } }],
 				},
 				{
-					label: 'Guides',
-					translations: { 'zh-CN': '指南', 'zh-HK': '指南', 'zh-TW': '指南' },
+					label: 'Server',
+					translations: { 'zh-CN': '服务器', 'zh-HK': '服务器', 'zh-TW': '服务器' },
 					items: [
 						// Each item here is one entry in the navigation menu.
 						// label 为默认（英文）文案，translations 按各语言 lang 码提供对应标签；

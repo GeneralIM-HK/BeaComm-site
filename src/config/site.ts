@@ -317,7 +317,7 @@ const features = {
 			},
 			body: {
 				en: 'Deploy to your own server or private cloud with a single command. Your data stays entirely in your hands — no third-party services required.',
-				'zh-cn': '一行命令即可部署到自有服务器或私有云，数据完全保存在自己手中，无需依赖任何第三方服务。',
+				'zh-cn': '一行命令即可[部署](/intro/install-server/)到自有服务器或私有云，数据完全保存在自己手中，无需依赖任何第三方服务。',
 				'zh-hk': '一行指令即可部署到自有伺服器或私有雲，數據完全保存在自己手中，無需依賴任何第三方服務。',
 				'zh-tw': '一行指令即可部署到自有伺服器或私有雲，資料完全保存在自己手中，無需依賴任何第三方服務。',
 			},
@@ -362,7 +362,7 @@ const features = {
 			},
 			body: {
 				en: 'Domain, storage, member permissions — everything is managed in one admin console. Changes apply instantly, no restart needed.',
-				'zh-cn': '从域名、存储到成员权限，所有配置集中在一个管理后台面板中，修改即时生效，无需重启服务。',
+				'zh-cn': '从[域名](/guides/config-domain)、[邮件](/guides/config-email)、[证书](/guides/config-https)到成员管理、群组管理、后台权限管理，所有配置集中在一个管理后台面板中，修改即时生效，无需重启服务。',
 				'zh-hk': '由網域、儲存到成員權限，所有設定集中在一個管理後台面板中，修改即時生效，無需重啟服務。',
 				'zh-tw': '從網域、儲存空間到成員權限，所有設定集中在一個管理後台面板中，修改即時生效，無需重啟服務。',
 			},
@@ -619,7 +619,7 @@ const downloads = {
 			links: [
 				{
 					// label: { en: 'App Store', 'zh-cn': 'App Store', 'zh-hk': 'App Store', 'zh-tw': 'App Store' },
-					label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
+					label: { en: 'Coming Soon to the App Store', 'zh-cn': '即将上线 App Store', 'zh-hk': '即將登陸 App Store', 'zh-tw': '即將在 App Store 登場' },
 					// href: 'https://apps.apple.com/',
 					href: '/#download',
 					// external: true,
@@ -634,7 +634,7 @@ const downloads = {
 			links: [
 				{
 					// label: { en: 'Google Play', 'zh-cn': 'Google Play', 'zh-hk': 'Google Play', 'zh-tw': 'Google Play' },
-					label: { en: 'Google Play Coming soon', 'zh-cn': 'Google Play 即将推出', 'zh-hk': 'Google Play 即將推出', 'zh-tw': 'Google Play 即將推出' },
+					label: { en: 'Coming Soon to the Google Play', 'zh-cn': '即将上线 Google Play', 'zh-hk': '即將登陸 Google Play', 'zh-tw': '即將在 Google Play 登場' },
 					// href: 'https://play.google.com/',
 					href: '/#download',
 					// external: true,
@@ -654,7 +654,7 @@ const downloads = {
 				{
 					label: { en: 'Get Installer', 'zh-cn': '获取安装包', 'zh-hk': '取得安裝程式', 'zh-tw': '取得安裝套件' },
 					// label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
-					href: 'https://file.beacomm.chat/win/BeaComm-win-x64-latest.exe',
+					href: 'https://file.beacomm.chat/win/BeaComm-setup-x64.exe',
 					// external: true,
 				},
 				// {
@@ -671,7 +671,7 @@ const downloads = {
 			links: [
 				{
 					// label: { en: 'Apple silicon', 'zh-cn': 'Apple 芯片', 'zh-hk': 'Apple 晶片', 'zh-tw': 'Apple 晶片' },
-					label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
+					label: { en: 'Coming Soon to the App Store', 'zh-cn': '即将上线 App Store', 'zh-hk': '即將登陸 App Store', 'zh-tw': '即將在 App Store 登場' },
 					// href: '/downloads/BeaComm-macos-arm64.dmg',
 					href: '/#download',
 				},
@@ -724,6 +724,23 @@ const contact = {
 			],
 		},
 		{
+			id: 'whatsapp',
+			icon: 'whatsApp',
+			title: { en: 'WhatsApp', 'zh-cn': 'WhatsApp', 'zh-hk': 'WhatsApp', 'zh-tw': 'WhatsApp' },
+			description: {
+				en: 'Chat with our customer service team anytime, about anything.',
+				'zh-cn': '与我们的客服团队交流任何问题，随时。',
+				'zh-hk': '與我們的客服團隊交流任何問題，隨時。',
+				'zh-tw': '與我們的客服團隊交流任何問題，隨時。',
+			},
+			links: [
+				{
+					label: { en: 'Start WhatsApp', 'zh-cn': '打开 WhatsApp', 'zh-hk': '打开 WhatsApp', 'zh-tw': '打开 WhatsApp' },
+					href: 'https://wa.me/message/MOZY23T6IMXGD1',
+				},
+			],
+		},
+		{
 			id: 'livechat',
 			icon: 'comment',
 			title: { en: 'Live Chat', 'zh-cn': '在线客服', 'zh-hk': '在線客服', 'zh-tw': '在線客服' },
@@ -741,43 +758,7 @@ const contact = {
 				},
 			],
 		}
-		// {
-		// 	id: 'github',
-		// 	icon: 'github',
-		// 	title: { en: 'GitHub', 'zh-cn': 'GitHub', 'zh-hk': 'GitHub', 'zh-tw': 'GitHub' },
-		// 	description: {
-		// 		en: 'Issues, discussions and contributions.',
-		// 		'zh-cn': '提交 Issue、参与讨论与贡献代码。',
-		// 		'zh-hk': '提交 Issue、參與討論與貢獻程式碼。',
-		// 		'zh-tw': '提交 Issue、參與討論與貢獻程式碼。',
-		// 	},
-		// 	links: [
-		// 		{
-		// 			label: { en: 'Open issues', 'zh-cn': '问题反馈', 'zh-hk': '問題回報', 'zh-tw': '問題回報' },
-		// 			href: 'https://github.com/',
-		// 			external: true,
-		// 		},
-		// 	],
-		// },
-		// {
-		// 	id: 'wechat',
-		// 	icon: 'comment',
-		// 	title: { en: 'WeChat', 'zh-cn': '微信', 'zh-hk': '微信', 'zh-tw': '微信' },
-		// 	description: {
-		// 		en: 'Follow our official account for updates.',
-		// 		'zh-cn': '关注公众号获取最新动态。',
-		// 		'zh-hk': '關注公眾號獲取最新動態。',
-		// 		'zh-tw': '追蹤公眾號取得最新動態。',
-		// 	},
-		// 	links: [
-		// 		{
-		// 			label: { en: 'BeaCommChat', 'zh-cn': 'BeaCommChat', 'zh-hk': 'BeaCommChat', 'zh-tw': 'BeaCommChat' },
-		// 			href: '#',
-		// 		},
-		// 	],
-		// },
-		// 需要更多联系方式（Telegram / X / 微博……）时，继续向 cards 添加对象即可。
-		// Add more contact cards (Telegram / X / …) as needed.
+
 	] satisfies ContactCard[],
 };
 
@@ -878,9 +859,10 @@ const footer = {
 		{
 			title: { en: 'Product', 'zh-cn': '产品', 'zh-hk': '產品', 'zh-tw': '產品' },
 			links: [
+				{ label: { en: 'Home', 'zh-cn': '首页', 'zh-hk': '首頁', 'zh-tw': '首頁' }, href: '/#' },
+				{ label: { en: 'Features', 'zh-cn': '功能特性', 'zh-hk': '功能特色', 'zh-tw': '功能特色' }, href: '/#features' },
 				{ label: { en: 'Pricing', 'zh-cn': '套餐价格', 'zh-hk': '套餐價格', 'zh-tw': '套餐價格' }, href: '/#pricing' },
-				{ label: { en: 'Download', 'zh-cn': '下载', 'zh-hk': '下載', 'zh-tw': '下載' }, href: '/#download' },
-				// { label: { en: 'Contact', 'zh-cn': '联系我们', 'zh-hk': '聯絡我們', 'zh-tw': '聯絡我們' }, href: '/#contact' },
+				// { label: { en: 'Download', 'zh-cn': '下载', 'zh-hk': '下載', 'zh-tw': '下載' }, href: '/#download' }
 			],
 		},
 		{
@@ -906,6 +888,8 @@ const footer = {
 			links: [
 				{ label: { en: 'Contact us', 'zh-cn': '联系我们', 'zh-hk': '聯絡我們', 'zh-tw': '聯絡我們' }, href: '/#contact' },
 				{ label: { en: 'Email support', 'zh-cn': '邮件支持', 'zh-hk': '電郵支援', 'zh-tw': '信件支援' }, href: 'mailto:support@BeaComm.chat' },
+				{ label: { en: 'WhatsApp', 'zh-cn': 'WhatsApp', 'zh-hk': 'WhatsApp', 'zh-tw': 'WhatsApp' }, href: 'https://wa.me/message/MOZY23T6IMXGD1' },
+				{ label: { en: 'Live Chat', 'zh-cn': '在线客服', 'zh-hk': '在线客服', 'zh-tw': '在线客服' }, href: 'https://tawk.to/chat/6ade0c6da136913473132020/1k5pm13v5?layout=modern' }
 			],
 		}
 		// 可继续添加更多栏目。
