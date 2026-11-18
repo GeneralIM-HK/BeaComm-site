@@ -583,7 +583,8 @@ const pricing = {
 				},
 			],
 			cta: {
-				label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
+				// label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
+				label: { en: 'Contact us', 'zh-cn': '联系我们', 'zh-hk': '聯繫我們', 'zh-tw': '聯繫我們' },
 				href: '#contact',
 			},
 		},
