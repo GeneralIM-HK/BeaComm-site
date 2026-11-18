@@ -728,10 +728,10 @@ const contact = {
 			icon: 'comment',
 			title: { en: 'Live Chat', 'zh-cn': '在线客服', 'zh-hk': '在線客服', 'zh-tw': '在線客服' },
 			description: {
-				en: 'Chat with the customer service online, anything.',
-				'zh-cn': '与客服人员在线交流，任何问题。',
-				'zh-hk': '與客服人員在線交流，任何問題',
-				'zh-tw': '與客服人員在線交流，任何問題',
+				en: 'Chat with our customer service team anytime, about anything.',
+				'zh-cn': '与我们的客服团队交流任何问题，随时。',
+				'zh-hk': '與我們的客服團隊交流任何問題，隨時。',
+				'zh-tw': '與我們的客服團隊交流任何問題，隨時。',
 			},
 			links: [
 				{
