@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 站点内容配置（Site content configuration）
  * ------------------------------------------
  * 套餐价格、下载入口、联系方式、页脚链接均在此配置，组件会自动渲染并按当前语言显示对应文案。
@@ -132,7 +132,13 @@ export interface PricingPlan {
 	/** 套餐包含内容列表 */
 	features: LocalizedText[];
 	/** 操作按钮 */
-	cta: { label: LocalizedText; href: string; variant?: 'primary' | 'secondary' | 'minimal' };
+	cta: {
+		label: LocalizedText;
+		href: string;
+		variant?: 'primary' | 'secondary' | 'minimal';
+		/** 外链时新窗口打开 */
+		external?: boolean;
+	};
 }
 
 /** 下载按钮：列表中第一个为主要按钮，其余为次要按钮 */
@@ -465,8 +471,59 @@ const pricing = {
 			cta: {
 				label: { en: 'Deploy Now', 'zh-cn': '立即部署', 'zh-hk': '立即部署', 'zh-tw': '立即部署' },
 				href: '#install',
+				external: false
 			},
 		},
+		// {
+		// 	id: 'basic',
+		// 	name: {
+		// 		en: 'Basic',
+		// 		'zh-cn': '基础版',
+		// 		'zh-hk': '基礎版',
+		// 		'zh-tw': '基礎版',
+		// 	},
+		// 	description: {
+		// 		en: 'For small businesses that have already commercialized.   ',
+		// 		'zh-cn': '适合已经商业化的小型企业。',
+		// 		'zh-hk': '適合已經商業化嘅小型企業。',
+		// 		'zh-tw': '適合已經商業化的小型企業。',
+		// 	},
+		// 	// price: { en: 'Free', 'zh-cn': '免费', 'zh-hk': '免費', 'zh-tw': '免費' },
+		// 	// priceNote: { en: 'forever', 'zh-cn': '永久', 'zh-hk': '永久', 'zh-tw': '永久' },
+		// 	price: { en: 'US $159', 'zh-cn': 'US $159', 'zh-hk': 'US $159', 'zh-tw': 'US $159' },
+		// 	priceNote: { en: 'per month', 'zh-cn': '/ 每月', 'zh-hk': '/ 月', 'zh-tw': '/ 月' },
+		// 	features: [
+		// 		{
+		// 			en: 'Unlimited messages and chat history',
+		// 			'zh-cn': '不限消息数量与聊天记录',
+		// 			'zh-hk': '不限訊息數量與聊天記錄',
+		// 			'zh-tw': '不限訊息數量與聊天記錄',
+		// 		},
+		// 		{
+		// 			en: 'Up to 5 members per server',
+		// 			'zh-cn': '单服务器最多 50 名成员',
+		// 			'zh-hk': '單伺服器最多 50 名成員',
+		// 			'zh-tw': '單一伺服器最多 50 名成員',
+		// 		},
+		// 		{
+		// 			en: 'All platform clients (iOS, Android, Windows, macOS)',
+		// 			'zh-cn': '全平台客户端（iOS、Android、Windows、macOS）',
+		// 			'zh-hk': '全平台用戶端（iOS、Android、Windows、macOS）',
+		// 			'zh-tw': '全平台用戶端（iOS、Android、Windows、macOS）',
+		// 		},
+		// 		{
+		// 			en: 'Dedicated technical support contact, with priority email and live chat response within 12 hours',
+		// 			'zh-cn': '邮件与官网 Live Chat 优先响应（1 小时内）',
+		// 			'zh-hk': '電郵與官網 Live Chat 優先回應（1 小時內）',
+		// 			'zh-tw': '電郵與官網 Live Chat 優先回應（1 小時內）',
+		// 		},
+		// 	],
+		// 	cta: {
+		// 		label: { en: 'Subscribe now', 'zh-cn': '立即订阅', 'zh-hk': '立即订阅', 'zh-tw': '立即订阅' },
+		// 		href: 'https://buy.stripe.com/test_8x29AU0676hLef57ru8EM01',
+		// 		external: true
+		// 	},
+		// },
 		{
 			id: 'business',
 			name: {
@@ -482,7 +539,7 @@ const pricing = {
 				'zh-tw': '專為追求規模化、高效能與專屬支援的成長型團隊打造。',
 			},
 			price: { en: 'US $1599', 'zh-cn': 'US $1599', 'zh-hk': 'US $1599', 'zh-tw': 'US $1599' },
-			priceNote: { en: 'per month', 'zh-cn': '/ 月', 'zh-hk': '/ 月', 'zh-tw': '/ 月' },
+			priceNote: { en: 'per month', 'zh-cn': '/ 每月', 'zh-hk': '/ 月', 'zh-tw': '/ 月' },
 			badge: {
 				en: 'Recommended',
 				'zh-cn': '推荐',
@@ -505,14 +562,21 @@ const pricing = {
 				},
 				{
 					en: 'Dedicated technical support contact, with priority email and live chat response within 12 hours',
-					'zh-cn': '配备专属技术支持人员，邮件与官网 Live Chat 优先响应（12 小时内）',
-					'zh-hk': '配備專屬技術支援人員，電郵與官網 Live Chat 優先回應（12 小時內）',
-					'zh-tw': '配備專屬技術支援人員，電郵與官網 Live Chat 優先回應（12 小時內）',
+					'zh-cn': '配备专属技术支持人员，邮件与官网 Live Chat 优先响应（1 小时内）',
+					'zh-hk': '配備專屬技術支援人員，電郵與官網 Live Chat 優先回應（1 小時內）',
+					'zh-tw': '配備專屬技術支援人員，電郵與官網 Live Chat 優先回應（1 小時內）',
 				},
+				{
+					en: 'Includes monthly renewable software licenses',
+					'zh-cn': '将交付可按月续期的软件许可',
+					'zh-hk': '將交付可按月續期的軟件許可',
+					'zh-tw': '將交付可按月續期的軟體許可',
+				}
 			],
 			cta: {
-				label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
-				href: '#contact',
+				label: { en: 'Subscribe now', 'zh-cn': '立即订阅', 'zh-hk': '立即订阅', 'zh-tw': '立即订阅' },
+				href: 'https://buy.stripe.com/test_14A14o2ef7lP4Ev27a8EM00',
+				external: true
 			},
 		},
 		{
@@ -586,6 +650,7 @@ const pricing = {
 				// label: { en: 'Coming soon', 'zh-cn': '即将推出', 'zh-hk': '即將推出', 'zh-tw': '即將推出' },
 				label: { en: 'Contact us', 'zh-cn': '联系我们', 'zh-hk': '聯繫我們', 'zh-tw': '聯繫我們' },
 				href: '#contact',
+				external: false
 			},
 		},
 		// 需要更多套餐时，向上面的 plans 数组继续添加对象即可。
@@ -910,9 +975,9 @@ const footer = {
 
 	copyright: {
 		en: '© {year} BeaComm Team & HK General IM Tech Ltd. All rights reserved.',
-		'zh-cn': '© {year} BeaComm 团队及香港通用即通科技有限公司· 保留所有权利',
-		'zh-hk': '© {year} BeaComm 團隊及香港通用即通科技有限公司. 保留所有權利',
-		'zh-tw': '© {year} BeaComm 團隊及香港通用即通科技有限公司· 保留所有權利',
+		'zh-cn': '© {year} BeaComm 团队及香港通用即通科技有限公司 · 保留所有权利',
+		'zh-hk': '© {year} BeaComm 團隊及香港通用即通科技有限公司 . 保留所有權利',
+		'zh-tw': '© {year} BeaComm 團隊及香港通用即通科技有限公司 · 保留所有權利',
 	},
 };
 
